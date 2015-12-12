@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151211173500) do
+ActiveRecord::Schema.define(version: 20151212224525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "annotations", force: :cascade do |t|
+    t.integer "readme_id"
+    t.string  "quote"
+    t.string  "text"
+    t.string  "uri"
+    t.json    "ranges",    default: {}
+  end
 
   create_table "notes", force: :cascade do |t|
     t.string "content"

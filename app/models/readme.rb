@@ -2,7 +2,7 @@ require 'FileUtils'
 
 class Readme < ActiveRecord::Base
 
-  has_many :sentences
+  has_many :annotations
 
   # attr_accessor :title
 
