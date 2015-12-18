@@ -12,13 +12,19 @@ class Api::V1::AnnotationsController < ApplicationController
   end
 
   def create
-    annotation = Annotation.create(annotation_params)
-    annotation.update(uri: request.referrer)
-    render json: Annotation.create(annotation_params)
+    @annotation = Annotation.create!(annotation_params)
+    @annotation.update(uri: request.referrer)
+    note = {id: @annotation.id.to_s, readme_id: @annotation.readme_id, quote: @annotation.quote, text: @annotation.text, uri: @annotation.uri, ranges: @annotation.ranges}
+      
+    render json: note, status: 200
   end
 
   def update
     render json: annotation.update(annotation_params)
+  end
+
+  def put
+    binding.pry
   end
 
   def destroy
