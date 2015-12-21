@@ -11,6 +11,7 @@ gem 'active_model_serializers'
 gem 'pg'
 gem 'pry'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'rails_12factor'
 
 
 
