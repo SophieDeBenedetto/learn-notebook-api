@@ -1,16 +1,11 @@
-require 'FileUtils'
-
 class Readme < ActiveRecord::Base
 
   has_many :annotations
 
-  # attr_accessor :title
 
   before_save :set_title
 
-  # def title
-  #   self.sentences.where("title = ?", true)
-  # end
+  
 
   def self.generate_readme(readme_params)
     url = readme_params["url"]
