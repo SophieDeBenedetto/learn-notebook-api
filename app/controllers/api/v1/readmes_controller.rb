@@ -1,6 +1,8 @@
 class Api::V1::ReadmesController < ApplicationController
   # respond_to :json
 
+  before_action :configure_client, only: :create
+
   def index
     render json: Readme.all
   end
@@ -10,7 +12,7 @@ class Api::V1::ReadmesController < ApplicationController
   end
 
   def create
-    render json: Readme.generate_readme(readme_params)
+    render json: Readme.generate_readme(@client, readme_params)
   end
 
   def update
@@ -30,5 +32,10 @@ class Api::V1::ReadmesController < ApplicationController
   def readme_params
     params.require(:readme).permit(:url)
   end
+
+  def configure_client
+    @client ||= Octokit::Client.new(access_token: ENV["octo_token"])
+  end
+
 
 end

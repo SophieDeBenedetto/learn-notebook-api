@@ -7,18 +7,26 @@ class Readme < ActiveRecord::Base
 
   
 
-  def self.generate_readme(readme_params)
+  # def self.generate_readme(readme_params)
+  #   url = readme_params["url"]
+  #   repo = repo_name(url)
+  #   Dir.chdir(File.join(Rails.root, 'tmp'))
+  #   system "git init"
+  #   system "git clone #{url}"
+  #   Dir.chdir(File.join(Rails.root, 'tmp', repo))
+  #   path = Dir.pwd
+  #   file = path + "/README.md"
+  #   content = File.read(file)
+  #   Readme.create(content: content)
+  #   remove_repo(repo)
+  # end
+
+  def self.generate_readme(client, readme_params)
     url = readme_params["url"]
     repo = repo_name(url)
-    Dir.chdir(File.join(Rails.root, 'tmp'))
-    system "git init"
-    system "git clone #{url}"
-    Dir.chdir(File.join(Rails.root, 'tmp', repo))
-    path = Dir.pwd
-    file = path + "/README.md"
-    content = File.read(file)
+    readme = client.readme("learn-co-curriculum/#{repo}")
+    content = Base64.decode64(readme["content"])
     Readme.create(content: content)
-    remove_repo(repo)
   end
 
   def self.repo_name(url)

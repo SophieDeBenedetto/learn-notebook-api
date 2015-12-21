@@ -12,6 +12,8 @@ gem 'pg'
 gem 'pry'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'rails_12factor'
+gem 'figaro'
+gem 'octokit'
 
 
 
