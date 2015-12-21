@@ -1,5 +1,4 @@
 class Api::V1::AnnotationsController < ApplicationController
-  # respond_to :json
 
   def index
     render json: Annotation.all
@@ -21,10 +20,6 @@ class Api::V1::AnnotationsController < ApplicationController
 
   def update
     render json: annotation.update(annotation_params)
-  end
-
-  def put
-    binding.pry
   end
 
   def destroy
